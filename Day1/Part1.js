@@ -37,22 +37,30 @@ export function FirstAndLastNumbersInText(input) {
     return [];
 }
 
-export function SumOfFirstAndLastNumbersInText(input) {
+export function CombinationOfFirstAndLastNumbersInText(input) {
     var numbers = FirstAndLastNumbersInText(input);
     if (numbers.length === 0)
         return 0;
 
     if (numbers.length === 1)
-        return numbers[0];
+        return (numbers[0] * 10) + numbers[0];
 
     if (numbers.length > 1)
-        return numbers[0] + numbers[1];
+        return (numbers[0] * 10) + numbers[1];
     
     return -1; // something wrong
 }
 
 export function GetResult(filename, logOutput){
     DisplayLog = logOutput;
-    var arr = GetFileContentsAsArray(filename);
-    return -1;
+    var array = GetFileContentsAsArray(filename);
+    var total = 0;
+
+    for (let index = 0; index < array.length; index++) {
+        const element = array[index];
+        var numberFromRow = CombinationOfFirstAndLastNumbersInText(element);
+        Log("INFO", numberFromRow);
+        total = total + numberFromRow;
+    }
+    return total;
 }

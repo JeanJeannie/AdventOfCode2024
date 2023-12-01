@@ -3,6 +3,13 @@ adventofcode.com/2023
 
 ## How to run in VSCode
 
+From the terminal
+```
+node index.js
+```
+
+Debugging via (not currently working):
+
 From `index.js` file
 
 `Run` -> `Start debugging` -> `NodeJS` (if asked)
