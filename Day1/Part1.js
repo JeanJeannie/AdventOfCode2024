@@ -9,6 +9,16 @@ function Log(logLevel, message){
     return;
 }
 
+export function IsNumber(input) {
+    return !isNaN(input);
+}
+
+export function ParseNumbers(input) {
+    var chars = input.split('');
+    var numbers = chars.filter(IsNumber)
+    return numbers;
+}
+
 export function GetResult(filename, logOutput){
     DisplayLog = logOutput;
     var arr = GetFileContentsAsArray(filename);
