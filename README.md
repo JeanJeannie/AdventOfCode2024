@@ -4,6 +4,7 @@ adventofcode.com/2023
 ## How to run in VSCode
 
 From `index.js` file
+
 `Run` -> `Start debugging` -> `NodeJS` (if asked)
 
 ## How to run tests in VSCode
@@ -25,27 +26,27 @@ Update package.json so the `"test"` command uses jest
 
 ### Run tests
 
-Open a terminal window.
+In a terminal window.
 
-Run all tests:
+#### Run all tests
+
 ```
 npm test
 ```
-or
-```
-jest
-```
-or
+or simply 
+
 ```
 npm t
 ```
 
-Run single tests
+### Run single test file
 
 ```
 npm t -- path/to/test.js
 ```
-or
+
+### Run all tests within a folder
+
 ```
 npm t -- path/
 ```
