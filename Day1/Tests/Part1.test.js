@@ -22,18 +22,41 @@ describe("Parse Number", () => {
   })
 })
 
+describe("Return last number", () => {
+  test("it returns the last number", () => {
+    let res = day.FindLastNumber("a1b2c3def");
+    expect(res).toBe(3);
+  }), 
+  test("it returns null when no number provided", () => {
+    let res = day.FindLastNumber("zyxabc");
+    expect(res).toBeNull();
+  })
+})
+
+describe("Return first number", () => {
+  test("it returns the first number", () => {
+    let res = day.FindFirstNumber("a1b2c3def");
+    expect(res).toBe(1);
+  }), 
+  test("it returns null when no number provided", () => {
+    let res = day.FindFirstNumber("zyxabc");
+    expect(res).toBeNull();
+  })
+})
+
+
 describe("Return first and last number", () => {
   test("it returns empty when no numbers", () => {
     let res = day.FirstAndLastNumbersInText("abc");
     expect(res).toEqual([])
   }),
-  test("it returns one number when text only has 1 number", () => {
+  test("it returns 2 numbers when text only has 1 number", () => {
     let res = day.FirstAndLastNumbersInText("a1bc").length;
-    expect(res).toBe(1)
+    expect(res).toBe(2)
   }),
-  test("it returns first number when text only has 1 number", () => {
+  test("it returns the first number twice when text only has 1 number", () => {
     let res = day.FirstAndLastNumbersInText("a1bc");
-    expect(res).toEqual([1])
+    expect(res).toEqual([1,1])
   }),
   test("it returns two numbers when text has 2 numbers", () => {
     let res = day.FirstAndLastNumbersInText("a1b3c").length;

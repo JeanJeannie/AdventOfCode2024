@@ -4,8 +4,8 @@ let DisplayLog = false;
 //https://adventofcode.com/2022/day/3
 
 function Log(logLevel, message){
-    if (logLevel == "INFO") console.log(`[${logLevel}] ${message}`);
-    if (logLevel != "INFO" && DisplayLog) console.log(`[${logLevel}] ${message}`);
+    if (logLevel != "INFO") console.log(`[${logLevel}] ${message}`);
+    if (logLevel == "INFO" && DisplayLog) console.log(`[${logLevel}] ${message}`);
     return;
 }
 
@@ -20,21 +20,15 @@ export function ParseNumbers(input) {
 }
 
 export function FirstAndLastNumbersInText(input) {
-    var numbers = ParseNumbers(input);
-
-    if (numbers.length >= 1 && numbers.length <=2)
-    {
-        return numbers;
+    var firstNumber = FindFirstNumber(input);
+    if (firstNumber === null){
+        return [];
     }
-
-    if (numbers.length > 2)
-    {
-        var first = numbers[0];
-        var last = numbers[numbers.length-1];
-        return [first, last];
+    var lastNumber = FindLastNumber(input);
+    if (lastNumber === null){  // shouldn't be possible as the firstNumber variable would also be null
+        return [-1];  
     }
-
-    return [];
+    return [firstNumber, lastNumber];
 }
 
 export function CombinationOfFirstAndLastNumbersInText(input) {
@@ -42,13 +36,33 @@ export function CombinationOfFirstAndLastNumbersInText(input) {
     if (numbers.length === 0)
         return 0;
 
-    if (numbers.length === 1)
+    if (numbers.length === 1) // shouldn't happen as first number gets counted as last number
         return (numbers[0] * 10) + numbers[0];
 
     if (numbers.length > 1)
         return (numbers[0] * 10) + numbers[1];
     
     return -1; // something wrong
+}
+
+export function FindLastNumber(input){
+    let array = input.split('');
+    for (let index = array.length; index >= 0; index--) {
+        const element = array[index];
+        if (!isNaN(element))
+            return parseInt(element, 10);        
+    }
+    return null;
+}
+
+export function FindFirstNumber(input){
+    let array = input.split('');
+    for (let index = 0; index < array.length; index++) {
+        const element = array[index];
+        if (!isNaN(element))
+            return parseInt(element, 10);        
+    }
+    return null;
 }
 
 export function GetResult(filename, logOutput){
