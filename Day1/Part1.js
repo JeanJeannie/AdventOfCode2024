@@ -1,7 +1,7 @@
 import { GetFileContentsAsArray } from "../Helpers/ReadFile.js";
 let DisplayLog = false;
 
-//https://adventofcode.com/2022/day/3
+//https://adventofcode.com/2023/day/1
 
 function Log(logLevel, message){
     if (logLevel != "INFO") console.log(`[${logLevel}] ${message}`);

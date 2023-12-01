@@ -1,12 +1,12 @@
-import { GetResult } from "./Day1/Part1.js";
+import { GetResult } from "./Day1/Part2.js";
 import * as url from 'url';
 //const __filename = url.fileURLToPath(import.meta.url);
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
 let day = "Day1";
-let sampleFile = "SampleInput.txt";
+let sampleFile = "SampleInputPart2.txt";
 let puzzleInput = "Input.txt"
-let inputfile = puzzleInput;
+let inputfile = sampleFile;
 let logOutput = false;
 
 var filename = `${__dirname}/${day}/Input/${inputfile}`;
