@@ -52,3 +52,22 @@ describe("Return first and last number", () => {
     expect(res).toEqual([1, 7])
   })
 })
+
+describe("Return sum of first and last number", () => {
+  test("it returns 0 when no numbers", () => {
+    let res = day.SumOfFirstAndLastNumbersInText("abc");
+    expect(res).toBe(0)
+  }),
+  test("it returns the number when text only has 1 number", () => {
+    let res = day.SumOfFirstAndLastNumbersInText("a7bc");
+    expect(res).toBe(7)
+  }),
+  test("it returns sum of both numbers when text has 2 numbers", () => {
+    let res = day.SumOfFirstAndLastNumbersInText("a1b3c");
+    expect(res).toBe(4)
+  }),
+  test("it returns sum of first and last when text has more than 2 numbers", () => {
+    let res = day.SumOfFirstAndLastNumbersInText("a1b3c456c7dd");
+    expect(res).toBe(8)
+  })
+})

@@ -37,6 +37,20 @@ export function FirstAndLastNumbersInText(input) {
     return [];
 }
 
+export function SumOfFirstAndLastNumbersInText(input) {
+    var numbers = FirstAndLastNumbersInText(input);
+    if (numbers.length === 0)
+        return 0;
+
+    if (numbers.length === 1)
+        return numbers[0];
+
+    if (numbers.length > 1)
+        return numbers[0] + numbers[1];
+    
+    return -1; // something wrong
+}
+
 export function GetResult(filename, logOutput){
     DisplayLog = logOutput;
     var arr = GetFileContentsAsArray(filename);
