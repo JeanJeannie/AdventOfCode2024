@@ -16,7 +16,25 @@ export function IsNumber(input) {
 export function ParseNumbers(input) {
     var chars = input.split('');
     var numbers = chars.filter(IsNumber)
-    return numbers;
+    return numbers.map( char => parseInt(char, 10));
+}
+
+export function FirstAndLastNumbersInText(input) {
+    var numbers = ParseNumbers(input);
+
+    if (numbers.length >= 1 && numbers.length <=2)
+    {
+        return numbers;
+    }
+
+    if (numbers.length > 2)
+    {
+        var first = numbers[0];
+        var last = numbers[numbers.length-1];
+        return [first, last];
+    }
+
+    return [];
 }
 
 export function GetResult(filename, logOutput){
