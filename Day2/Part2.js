@@ -70,10 +70,10 @@ export function GetMinimumCubes(input){
 export function GetResult(filename, logOutput){
     DisplayLog = logOutput;
     var array = GetFileContentsAsArray(filename);
-    let totalOfPossibleGameNumbers = 0;
+    let powerTotal = 0;
     for (let index = 0; index < array.length; index++) {
         const row = array[index];
-       // totalOfPossibleGameNumbers = totalOfPossibleGameNumbers + ReturnGameNumberIfPossible(row);
+        powerTotal = powerTotal + GetMinimumCubes(row);
     }
-    return totalOfPossibleGameNumbers;
+    return powerTotal;
 }

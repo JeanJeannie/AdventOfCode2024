@@ -1,4 +1,4 @@
-import { GetResult } from "./Day2/Part1.js";
+import { GetResult } from "./Day2/Part2.js";
 import * as url from 'url';
 //const __filename = url.fileURLToPath(import.meta.url);
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
