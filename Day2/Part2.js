@@ -43,6 +43,30 @@ export function CountCubesInSetByColour(input, colour){
     return colourCubesCount;
 }
 
+export function GetMinimumCubes(input){
+    let gamesets = GetGameSets(input);
+    let maxBlueCubes = 0;
+    let maxRedCubes = 0;
+    let maxGreenCubes = 0;
+    for (let index = 0; index < gamesets.length; index++) {
+        const set = gamesets[index];
+        let blueCount = CountCubesInSetByColour(set, "blue");
+        let redCount = CountCubesInSetByColour(set, "red");
+        let greenCount = CountCubesInSetByColour(set, "green");
+        
+        if (blueCount > maxBlueCubes)
+            maxBlueCubes = blueCount;
+
+        if (redCount > maxRedCubes)
+            maxRedCubes = redCount;
+
+        if (greenCount > maxGreenCubes)
+            maxGreenCubes = greenCount;
+
+    }
+    return maxBlueCubes * maxRedCubes * maxGreenCubes;
+}
+
 export function GetResult(filename, logOutput){
     DisplayLog = logOutput;
     var array = GetFileContentsAsArray(filename);

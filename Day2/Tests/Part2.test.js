@@ -67,3 +67,13 @@ describe("Get green cubes from a Game Set", () => {
   })
 })
 
+describe("Get multiple of minimum cubes from game set", () => {
+  test("it returns 48 as minimum cubes are 4 red, 6 blue, 2 green", () => {
+    let result = day.GetMinimumCubes("Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green");
+    expect(result).toBe(48);
+  }),
+  test("it returns 1560 as minimum cubes are 20 red, 6 blue, 13 green", () => {
+    let result = day.GetMinimumCubes("Game 3: 8 green, 6 blue, 20 red; 5 blue, 4 red, 13 green; 5 green, 1 red");
+    expect(result).toBe(1560);
+  })
+})
