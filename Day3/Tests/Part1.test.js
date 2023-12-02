@@ -5,7 +5,7 @@ describe("example test", () => {
     expect(true).toBe(true);
   })
   test("it is false", () => { 
-    expect(false).toBe(true);
+    expect(false).toBe(false);
   })
 })
 
