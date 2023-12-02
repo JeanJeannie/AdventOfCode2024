@@ -47,25 +47,14 @@ export function FirstLetterOfLiteralNumbers() {
     });
 }
 
-export function FindPotentialLiterals(input) {
+export function FindPotentialLiteralsStartingWith(input) {
     return LiteralNumbers().filter( (element) => element.split('')[0] === input);
 }
 
-export function CheckAheadIfLiteralNumber(input) {
-// read each char.  If it's a number return it, if it's the first character of a literal number
-// check to see if the following characters match.  
-    let array = input.split('');
-    for (let index = 0; index < array.length; index++) { 
-        let curChar = array[index];
-        if (IsNumber(curChar)) {
-            return parseInt(curChar, 10);
-        }
-        let potentialLiteral = FirstLetterOfLiteralNumbers().findIndex((el) => el === curChar);
-        if (potentialLiteral >= 0){
-            return potentialLiteral;
-        }
-    }
+export function FindPotentialLiteralsEndingWith(input) {
+    return LiteralNumbers().filter( (element) => element.split('')[element.length-1] === input);
 }
+
 
 export function FindFirstMatchingNumber(input){
     let array = input.split('');
@@ -79,7 +68,7 @@ export function FindFirstMatchingNumber(input){
         if (index !== 0){
             remainingArray = array.slice(index);
         }
-        let matchingLiteral = FindMatchingLiteral(remainingArray);
+        let matchingLiteral = FindFirstMatchingLiteral(remainingArray);
         if (matchingLiteral != null)
         {
             return matchingLiteral;
@@ -88,11 +77,8 @@ export function FindFirstMatchingNumber(input){
     return null;
 }
 
-
-export function FindMatchingLiteral(input){
-//    let inputArray = input.split('');
-    let potentialLiteral = FindPotentialLiterals(input[0]);
-   // return potentialLiteral;
+export function FindFirstMatchingLiteral(input){
+    let potentialLiteral = FindPotentialLiteralsStartingWith(input[0]);
     var inputNumber = null;
 
     for (let index = 0; index < potentialLiteral.length; index++) {
@@ -108,6 +94,44 @@ export function FindMatchingLiteral(input){
     return inputNumber;
 }
 
+export function FindLastMatchingNumber(input){
+    let array = input.split('');
+    for (let index = array.length-1; index >= 0; index--) {
+        const element = array[index];
+        if (IsNumber(element)) {
+            return parseInt(element, 10);
+        }
+
+        let remainingArray = array;
+        if (index !== array.length-1){
+            remainingArray = array.slice(0, index+1);
+        }
+        let matchingLiteral = FindLastMatchingLiteral(remainingArray);
+        if (matchingLiteral != null)
+        {
+            return matchingLiteral;
+        }        
+    }
+    return null;
+}
+
+export function FindLastMatchingLiteral(input){
+    let potentialLiteral = FindPotentialLiteralsEndingWith(input[input.length-1]);
+    var inputNumber = null;
+
+    for (let index = 0; index < potentialLiteral.length; index++) {
+        let element = potentialLiteral[index];
+        let lenElement = element.length;
+        let potentialInput = input.slice(input.length-lenElement, input.length).join('');
+        if (element == potentialInput){
+            inputNumber = textToNumber[potentialInput];
+            break;
+        }        
+    }    
+    return inputNumber;
+}
+    
+
 export function ParseTextAsNumber(input){
     var num = textToNumber[input];
     return num ?? null;
@@ -120,11 +144,11 @@ export function ParseNumbers(input) {
 }
 
 export function FirstAndLastNumbersInText(input) {
-    var firstNumber = FindFirstNumber(input);
+    var firstNumber = FindFirstMatchingNumber(input);
     if (firstNumber === null){
         return [];
     }
-    var lastNumber = FindLastNumber(input);
+    var lastNumber = FindLastMatchingNumber(input);
     if (lastNumber === null){  // shouldn't be possible as the firstNumber variable would also be null
         return [-1];  
     }

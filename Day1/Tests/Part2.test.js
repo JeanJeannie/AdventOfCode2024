@@ -74,53 +74,79 @@ describe("Get first character of literal numbers", () => {
   })
 })
 
-/*
-describe("Can extract literal number out of a string", () => {
-  test("returns 4 from abc4def", () => {
-    let res = day.CheckAheadIfLiteralNumber("abc4def");
-    expect(res).toBe(4);
-  })
-  test("returns 6 from abcsixdef", () => {
-    let res = day.CheckAheadIfLiteralNumber("abcsixdef");
-    expect(res).toBe(6);
-  })
-})
-*/ 
-
 describe("Find potential literals starting with the letter provided", () => {
   test("returns one when input given is o", () => {
-    let res = day.FindPotentialLiterals("o");
+    let res = day.FindPotentialLiteralsStartingWith("o");
     expect(res).toEqual(["one"]);
   }), 
   test("returns six, seven when input given is s", () => {
-    let res = day.FindPotentialLiterals("s");
+    let res = day.FindPotentialLiteralsStartingWith("s");
     expect(res).toEqual(["six", "seven"]);
   }),
   test("returns empty array when input given is d", () => {
-    let res = day.FindPotentialLiterals("d");
+    let res = day.FindPotentialLiteralsStartingWith("d");
     expect(res).toEqual([]);
   })
 })
 
-describe("Find matching literal", () => {
-  test("returns 1 when input given is onebcdef", () => {
-    let res = day.FindMatchingLiteral("onebcdef".split(''));
+describe("Find potential literals ending with the letter provided", () => {
+  test("returns six when input given is x", () => {
+    let res = day.FindPotentialLiteralsEndingWith("x");
+    expect(res).toEqual(["six"]);
+  }), 
+  test("returns one, three, five, nine when input given is e", () => {
+    let res = day.FindPotentialLiteralsEndingWith("e");
+    expect(res).toEqual(["one", "three", "five", "nine"]);
+  }),
+  test("returns empty array when input given is d", () => {
+    let res = day.FindPotentialLiteralsEndingWith("d");
+    expect(res).toEqual([]);
+  })
+})
+
+describe("Find last matching literal", () => {
+  test("returns 1 when input given is sixbcdefone", () => {
+    let res = day.FindLastMatchingLiteral("sixbcdefone".split(''));
     expect(res).toBe(1);
   }),
-  test("returns 3 when input given is threebcdef", () => {
-    let res = day.FindMatchingLiteral("threebcdef".split(''));
+  test("returns 3 when input given is azerobcdthree", () => {
+    let res = day.FindLastMatchingLiteral("azerobcdthree".split(''));
     expect(res).toBe(3);
   }),
-  test("returns 2 when input given is twobcdef", () => {
-    let res = day.FindMatchingLiteral("twobcdef".split(''));
-    expect(res).toBe(2);
+  test("returns 8 when input given is oneight", () => {
+    let res = day.FindLastMatchingLiteral("oneight".split(''));
+    expect(res).toBe(8);
   }),
-  test("returns 6 when input given is sixbcdef", () => {
-    let res = day.FindMatchingLiteral("sixbcdef".split(''));
+  test("returns 6 when input given is cdefsix", () => {
+    let res = day.FindLastMatchingLiteral("cdefsix".split(''));
     expect(res).toBe(6);
   }),
   test("returns null when input given is abcdef", () => {
-    let res = day.FindMatchingLiteral("abcdef".split(''));
+    let res = day.FindLastMatchingLiteral("abcdef".split(''));
+    expect(res).toBeNull();
+  })
+})
+
+
+describe("Find first matching literal", () => {
+  test("returns 1 when input given is onebcdef", () => {
+    let res = day.FindFirstMatchingLiteral("onebcdef".split(''));
+    expect(res).toBe(1);
+  }),
+  test("returns 3 when input given is threebcdef", () => {
+    let res = day.FindFirstMatchingLiteral("threebcdef".split(''));
+    expect(res).toBe(3);
+  }),
+  test("returns 2 when input given is twobcdef", () => {
+    let res = day.FindFirstMatchingLiteral("twobcdef".split(''));
+    expect(res).toBe(2);
+  }),
+  test("returns 6 when input given is sixbcdef", () => {
+    let res = day.FindFirstMatchingLiteral("sixbcdef".split(''));
+    expect(res).toBe(6);
+  }),
+  test("returns null when input given is abcdef", () => {
+    let res = day.FindFirstMatchingLiteral("abcdef".split(''));
     expect(res).toBeNull();
   })
 })
@@ -147,6 +173,34 @@ describe("Find first matching number", () => {
     expect(res).toBeNull();
   })
 })
+
+describe("Find last matching number", () => {
+  test("returns 1 when input given is abconebcdef", () => {
+    let res = day.FindLastMatchingNumber("abconebcdef");
+    expect(res).toBe(1);
+  }),
+  test("returns 3 when input given is abcthree", () => {
+    let res = day.FindLastMatchingNumber("abcthree");
+    expect(res).toBe(3);
+  }),
+  test("returns 3 when input given is two3bcdef", () => {
+    let res = day.FindLastMatchingNumber("two3bcdef");
+    expect(res).toBe(3);
+  }),
+  test("returns 1 when input given is se6xonebcdef", () => {
+    let res = day.FindLastMatchingNumber("se6xonebcdef");
+    expect(res).toBe(1);
+  }),
+  test("returns 3 when input given is a1bthreec", () => {
+    let res = day.FindLastMatchingNumber("a1bthreec");
+    expect(res).toBe(3);
+  }),
+  test("returns null when input given is sexoebcdef", () => {
+    let res = day.FindLastMatchingNumber("sexoebcdef");
+    expect(res).toBeNull();
+  }) //a1bthreec
+})
+
 
 describe("Parse Number", () => {
   test("it returns empty when no numbers", () => {
@@ -196,19 +250,19 @@ describe("Return first and last number", () => {
     expect(res).toEqual([1,1])
   }),
   test("it returns two numbers when text has 2 numbers", () => {
-    let res = day.FirstAndLastNumbersInText("a1b3c").length;
+    let res = day.FirstAndLastNumbersInText("a1bthreec").length;
     expect(res).toBe(2)
   }),
   test("it returns both numbers when text has 2 numbers", () => {
-    let res = day.FirstAndLastNumbersInText("a1b3c");
+    let res = day.FirstAndLastNumbersInText("a1bthreec");
     expect(res).toEqual([1, 3])
   }),
   test("it returns two numbers when text has more than 2 numbers", () => {
-    let res = day.FirstAndLastNumbersInText("a1b3c456c7dd").length;
+    let res = day.FirstAndLastNumbersInText("aoneb3c456c7dd").length;
     expect(res).toBe(2)
   }),
   test("it returns first and last numbers when text has more than 2 numbers", () => {
-    let res = day.FirstAndLastNumbersInText("a1b3c456c7dd");
+    let res = day.FirstAndLastNumbersInText("aoneb3c456c7dd");
     expect(res).toEqual([1, 7])
   })
 })
@@ -218,16 +272,20 @@ describe("Return first and last number combined as a single number", () => {
     let res = day.CombinationOfFirstAndLastNumbersInText("abc");
     expect(res).toBe(0)
   }),
+  test("it returns the number when text only has 1 literal number", () => {
+    let res = day.CombinationOfFirstAndLastNumbersInText("asevenbc");
+    expect(res).toBe(77)
+  }),
   test("it returns the number when text only has 1 number", () => {
     let res = day.CombinationOfFirstAndLastNumbersInText("a7bc");
     expect(res).toBe(77)
   }),
   test("it returns combination of both numbers when text has 2 numbers", () => {
-    let res = day.CombinationOfFirstAndLastNumbersInText("a1b3c");
+    let res = day.CombinationOfFirstAndLastNumbersInText("aonebthreec");
     expect(res).toBe(13)
   }),
   test("it returns combination of first and last when text has more than 2 numbers", () => {
-    let res = day.CombinationOfFirstAndLastNumbersInText("a1b3c456c7dd");
+    let res = day.CombinationOfFirstAndLastNumbersInText("a1b3c456csevendd");
     expect(res).toBe(17)
   })
 })
