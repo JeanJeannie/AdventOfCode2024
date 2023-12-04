@@ -6,8 +6,8 @@ const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 let day = "Day4";
 let sampleFile = "SampleInput.txt";
 let puzzleInput = "Input.txt"
-let inputfile = sampleFile;
-let logOutput = true;
+let inputfile = puzzleInput;
+let logOutput = false;
 
 var filename = `${__dirname}/${day}/Input/${inputfile}`;
 console.log(`${day} starting`)
