@@ -1,5 +1,5 @@
-# AdventOfCode2023
-adventofcode.com/2023
+# AdventOfCode2024
+adventofcode.com/2024
 
 ## How to run in VSCode
 
