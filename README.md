@@ -67,3 +67,4 @@ npm t -- path/to/test.js
 npm t -- path/
 ```
 
+# AdventOfCode2024
